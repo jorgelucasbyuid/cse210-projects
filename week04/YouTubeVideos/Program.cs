@@ -35,7 +35,7 @@ class Program
         video4.AddComment(new Comment("Leo", "Adding this to my weekly training schedule."));
         videos.Add(video4);
 
-        // Iterar e exibir as informações de cada vídeo
+        // Show information about the video
         foreach (Video video in videos)
         {
             video.DisplayVideo();
