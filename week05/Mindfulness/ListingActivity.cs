@@ -6,7 +6,7 @@ public class ListingActivity : Activity
     private int _count;
     private List<string> _prompts;
 
-    public ListingActivity()
+    public ListingActivity() : base()
     {
         _name = "Listing Activity";
         _description = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
@@ -26,18 +26,43 @@ public class ListingActivity : Activity
     {
         DisplayStartingMessage();
 
-        // A lógica da listagem entra aqui no projeto final
+        Console.WriteLine("List as many responses as you can to the following prompt:");
+        Console.WriteLine($"--- {GetRandomPrompt()} ---");
+        Console.Write("You may begin in: ");
+        ShowCountDown(5);
+        Console.WriteLine();
+
+        List<string> userList = GetListFromUser();
+        _count = userList.Count;
+
+        Console.WriteLine($"You listed {_count} items!");
 
         DisplayEndingMessage();
     }
 
     public string GetRandomPrompt()
     {
-        return "";
+        Random rand = new Random();
+        int index = rand.Next(_prompts.Count);
+        return _prompts[index];
     }
 
     public List<string> GetListFromUser()
     {
-        return new List<string>();
+        List<string> list = new List<string>();
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(_duration);
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write("> ");
+            string item = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(item))
+            {
+                list.Add(item);
+            }
+        }
+
+        return list;
     }
 }

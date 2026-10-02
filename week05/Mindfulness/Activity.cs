@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Threading;
 
 public class Activity
 {
@@ -15,16 +17,17 @@ public class Activity
 
     public void DisplayStartingMessage()
     {
-        Console.WriteLine($"Welcome to the {_name}.");
-        Console.WriteLine();
+        Console.Clear();
+        Console.WriteLine($"Welcome to the {_name}.\n");
         Console.WriteLine(_description);
         Console.WriteLine();
         Console.Write("How long, in seconds, would you like for your session? ");
         _duration = int.Parse(Console.ReadLine());
-        
+
         Console.Clear();
         Console.WriteLine("Get ready...");
-        ShowSpinner(5);
+        ShowSpinner(3);
+        Console.WriteLine();
     }
 
     public void DisplayEndingMessage()
@@ -34,29 +37,22 @@ public class Activity
         ShowSpinner(3);
         Console.WriteLine();
         Console.WriteLine($"You have completed another {_duration} seconds of the {_name}.");
-        ShowSpinner(5);
+        ShowSpinner(3);
     }
 
     public void ShowSpinner(int seconds)
     {
         List<string> animationStrings = new List<string> { "|", "/", "-", "\\" };
-        
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(seconds);
 
         int i = 0;
         while (DateTime.Now < endTime)
         {
-            string s = animationStrings[i];
-            Console.Write(s);
+            Console.Write(animationStrings[i]);
             Thread.Sleep(250);
             Console.Write("\b \b");
-            i++;
-
-            if (i >= animationStrings.Count)
-            {
-                i = 0;
-            }
+            i = (i + 1) % animationStrings.Count;
         }
     }
 
