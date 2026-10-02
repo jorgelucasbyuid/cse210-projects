@@ -1,6 +1,6 @@
 using System;
 
-//EXCEEDING REQUIREMENTS: added an activity tracking feature that records how many activities 
+//EXCEEDING REQUIREMENTS : I did add an activity tracking feature that records how many activities 
 //when the person completed during the program session and displays a total summary log 
 //before quitting.
 
